@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue"
-    tools:context=".DoadorMain">
+    tools:context=".DoadorActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="15dp"
-            android:text=""
+            android:text="teste"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -79,14 +79,14 @@
                 android:textSize="16sp"
                 android:importantForAutofill="no"/>
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/search_icon_background"
-                    android:contentDescription="@string/app_name"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_baseline_search"
-                    app:tint="@color/green" />
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/search_icon_background"
+                android:contentDescription="@string/app_name"
+                android:padding="6dp"
+                android:src="@drawable/ic_baseline_search"
+                app:tint="@color/green" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
