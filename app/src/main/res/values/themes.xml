@@ -6,5 +6,5 @@
         <item name="android:navigationBarColor">@color/blue</item>
     </style>
 
-    <style name="Theme.DoeIt" parent="Base.Theme.DoeIt" />
+    <style name="Theme.DoeIt" parent="Base.Theme.DoeIt"/>
 </resources>

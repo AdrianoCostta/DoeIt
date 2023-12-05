@@ -29,6 +29,7 @@ public class FormLogin extends AppCompatActivity {
     private Button bt_entrar;
     private ProgressBar progressBar;
     private TextView telaCadastroDoador;
+    private TextView telaCadastroDonatario;
     String[] mensagens = {"Preencha todos os campos"};
 
     @Override
@@ -42,6 +43,14 @@ public class FormLogin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FormLogin.this,FormCadastroDoador.class);
+                startActivity(intent);
+            }
+        });
+
+        telaCadastroDonatario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FormLogin.this,CadastroDonatario.class);
                 startActivity(intent);
             }
         });
@@ -81,7 +90,7 @@ public class FormLogin extends AppCompatActivity {
                         public void run() {
                             TelaPrincipal();
                         }
-                    }, 3000);
+                    }, 2000);
                 } else {
                     String erro;
 
@@ -119,6 +128,7 @@ public class FormLogin extends AppCompatActivity {
 
     private void IniciarComponents(){
         telaCadastroDoador = findViewById(R.id.telaCadastroDoador);
+        telaCadastroDonatario = findViewById(R.id.telaCadastroDonatario);
         edit_email = findViewById(R.id.edit_email);
         edit_senha = findViewById(R.id.edit_senha);
         bt_entrar = findViewById(R.id.bt_entrar);
