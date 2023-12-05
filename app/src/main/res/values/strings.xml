@@ -2,6 +2,7 @@
     <string name="app_name">Doe It</string>
     <string name="initial_text">“É a intenção, e não a doação, que faz o doador”, Gotthold Lessing</string>
     <string name="entrar">Entrar</string>
-    <string name="text_cadastroDoador">Cadastre-se como Doador</string>
-    <string name="text_cadastroDonatario">Cadastre-se como Donatário</string>
+    <string name="text_cadastroDoador">Faça uma Doação</string>
+    <string name="text_cadastroDonatario">Receba uma Doação</string>
+    <string name="title_cadastro">Cadastro Doador</string>
 </resources>
