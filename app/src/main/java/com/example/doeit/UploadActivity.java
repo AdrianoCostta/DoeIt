@@ -1,4 +1,4 @@
-package com.example.doeit;
+/*package com.example.doeit;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -131,4 +131,4 @@ public class UploadActivity extends AppCompatActivity {
                     }
                 });
     }
-}
+}*/

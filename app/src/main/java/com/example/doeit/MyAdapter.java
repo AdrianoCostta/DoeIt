@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+/*public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-}
+}*/
 
 class MyViewHolder extends RecyclerView.ViewHolder{
 

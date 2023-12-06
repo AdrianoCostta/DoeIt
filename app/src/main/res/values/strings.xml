@@ -5,4 +5,5 @@
     <string name="text_cadastroDoador">Faça uma Doação</string>
     <string name="text_cadastroDonatario">Receba uma Doação</string>
     <string name="title_cadastro">Cadastro Doador</string>
+    <string name="loreIp">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt turpis sit amet urna volutpat, id posuere velit gravida. Cras luctus convallis metus, sit amet convallis orci vehicula nec. Vestibulum viverra et eros vel aliquet. Nullam nisl arcu, commodo ut pretium eu, pharetra et velit.</string>
 </resources>
