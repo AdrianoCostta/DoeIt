@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,12 +17,15 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class PerfilUsuarioDoador extends AppCompatActivity {
+public class   PerfilUsuarioDoador extends AppCompatActivity {
 
     private TextView nomeUsuario,emailUsuario;
     private Button bt_deslogar;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String usuarioID;
+    String usuarioNome;
+
+    String nome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,6 @@ public class PerfilUsuarioDoador extends AppCompatActivity {
         bt_deslogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(PerfilUsuarioDoador.this,FormLogin.class);
                 startActivity(intent);
@@ -43,9 +46,8 @@ public class PerfilUsuarioDoador extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
+    protected void onResume() {
+        super.onResume();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -54,7 +56,8 @@ public class PerfilUsuarioDoador extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 if (documentSnapshot != null){
-                    nomeUsuario.setText(documentSnapshot.getString("nome"));
+                    usuarioNome = documentSnapshot.getString("nome");
+                    nomeUsuario.setText(usuarioNome);
                     emailUsuario.setText(email);
                 }
             }

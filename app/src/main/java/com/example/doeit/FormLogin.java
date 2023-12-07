@@ -1,5 +1,7 @@
 package com.example.doeit;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +25,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-public class FormLogin extends AppCompatActivity {
+public class            FormLogin extends AppCompatActivity {
 
     private EditText edit_email,edit_senha;
     private Button bt_entrar;
@@ -67,83 +73,76 @@ public class FormLogin extends AppCompatActivity {
                     snackbar.setTextColor(Color.RED);
                     snackbar.show();
                 } else {
-                    AutenticarUsuario2(v);
+                    AutenticarDoador(v);
                 }
             }
         });
     }
 
-    private void AutenticarUsuario1(View view){
-
+    private void AutenticarDoador(View view) {
         String email = edit_email.getText().toString();
         String senha = edit_senha.getText().toString();
 
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            assert user != null;
+                            String usuarioID = user.getUid();
 
-                if (task.isSuccessful()) {
-                    progressBar.setVisibility(View.VISIBLE);
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            TelaPrincipal1();
+                            DocumentReference referenceDoador = db.collection("Usuarios").document(usuarioID);
+                            referenceDoador.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            progressBar.setVisibility(View.VISIBLE);
+                                            new Handler().postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    TelaPrincipal1();
+                                                }
+                                            }, 2000);
+                                        }
+                                    }
+                                }
+                            });
+
+                            DocumentReference referenceDonatario = db.collection("Donatarios").document(usuarioID);
+                            referenceDonatario.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+                                            progressBar.setVisibility(View.VISIBLE);
+                                            new Handler().postDelayed(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    TelaPrincipal2();
+                                                }
+                                            }, 2000);
+                                        }
+                                    } else {
+                                        Log.d(TAG, "Erro ao obter documento: ", task.getException());
+                                    }
+                                }
+                            });
+                        } else {
+                            Snackbar snackbar = Snackbar.make(view, "Erro ao logar usuário", Snackbar.LENGTH_SHORT);
+                            snackbar.setBackgroundTint(Color.WHITE);
+                            snackbar.setTextColor(Color.RED);
+                            snackbar.show();
                         }
-                    }, 2000);
-                } else {
-                    String erro;
-
-                    try {
-                        throw task.getException();
-                    } catch (Exception e) {
-                        erro = "Erro ao logar usuário";
                     }
-
-                    Snackbar snackbar = Snackbar.make(view, erro, Snackbar.LENGTH_SHORT);
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.RED);
-                    snackbar.show();
-                }
-            }
-        });
+                });
     }
 
-    private void AutenticarUsuario2(View view){
-
-        String email = edit_email.getText().toString();
-        String senha = edit_senha.getText().toString();
-
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                if (task.isSuccessful()) {
-                    progressBar.setVisibility(View.VISIBLE);
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            TelaPrincipal2();
-                        }
-                    }, 2000);
-                } else {
-                    String erro;
-
-                    try {
-                        throw task.getException();
-                    } catch (Exception e) {
-                        erro = "Erro ao logar usuário";
-                    }
-
-                    Snackbar snackbar = Snackbar.make(view, erro, Snackbar.LENGTH_SHORT);
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.RED);
-                    snackbar.show();
-                }
-            }
-        });
-    }
 
     @Override
     protected void onStart() {
@@ -151,8 +150,31 @@ public class FormLogin extends AppCompatActivity {
 
         FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (usuarioAtual != null){
-            TelaPrincipal1();
+        if(usuarioAtual != null){
+            String usuarioID = usuarioAtual.getUid();
+
+            DocumentReference donatariosRef = FirebaseFirestore.getInstance().collection("Donatarios").document(usuarioID);
+            DocumentReference doadoresRef = FirebaseFirestore.getInstance().collection("Usuarios").document(usuarioID);
+
+            donatariosRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+                        TelaPrincipal2();
+                    }else{
+                        doadoresRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    TelaPrincipal1();
+                                }
+                            }
+                        });
+
+                    }
+                }
+            });
         }
     }
 

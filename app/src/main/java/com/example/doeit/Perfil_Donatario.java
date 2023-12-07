@@ -16,7 +16,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class Perfil_Donatario extends AppCompatActivity {
+public class  Perfil_Donatario extends AppCompatActivity {
 
     private TextView nomeUsuario,emailUsuario;
     private Button bt_deslogar;
@@ -49,7 +49,7 @@ public class Perfil_Donatario extends AppCompatActivity {
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        DocumentReference documentReference = db.collection("Usuarios").document(usuarioID);
+        DocumentReference documentReference = db.collection("Donatarios").document(usuarioID);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
