@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 public class HomeDonatario extends AppCompatActivity {
     private ImageView bt_logout;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
