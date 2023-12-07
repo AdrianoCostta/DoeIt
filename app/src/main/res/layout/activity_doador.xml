@@ -23,8 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:text="Olá"
-            android:textSize="25sp"
+            android:text="Olá,"
+            android:textColor="@color/accent"
+            android:textSize="20sp"
+            android:textStyle="normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -34,10 +36,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="15dp"
-            android:text="teste"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:textStyle="bold"
+            android:text=""
+            android:textColor="@color/accent"
+            android:textSize="20sp"
+            android:textStyle="normal"
             app:layout_constraintStart_toEndOf="@id/textOla"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -48,7 +50,7 @@
             android:layout_marginEnd="15dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_baseline_account_circle"
-            app:tint="@color/black"
+            app:tint="@color/accent"
             app:layout_constraintBottom_toBottomOf="@id/textOla"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textOla"/>
@@ -86,7 +88,7 @@
                 android:contentDescription="@string/app_name"
                 android:padding="6dp"
                 android:src="@drawable/ic_baseline_search"
-                app:tint="@color/green" />
+                app:tint="@color/accent" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -122,13 +124,14 @@
                     android:layout_margin="8dp"
                     android:contentDescription="@string/app_name"
                     android:padding="8dp"
-                    android:src="@drawable/undraw_web_shopping_re_owap" />
+                    android:tint="@color/accent"
+                    android:src="@drawable/ic_donate" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Doaçoes Recentes"
+                    android:text="Doações Recentes"
                     android:textColor="@color/accent"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
@@ -155,13 +158,14 @@
                     android:layout_margin="8dp"
                     android:contentDescription="@string/app_name"
                     android:padding="8dp"
-                    android:src="@drawable/undraw_add_files_re_v09g" />
+                    android:tint="@color/accent"
+                    android:src="@drawable/ic_add_donate"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Adicionar Doaçõe"
+                    android:text="Adicionar Doação"
                     android:textColor="@color/accent"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
@@ -188,13 +192,14 @@
                     android:layout_margin="8dp"
                     android:contentDescription="@string/app_name"
                     android:padding="8dp"
-                    android:src="@drawable/calendar" />
+                    android:tint="@color/accent"
+                    android:src="@drawable/ic_calendar" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Doações A Expirar"
+                    android:text="Doações a Expirar"
                     android:textColor="@color/accent"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
@@ -221,7 +226,8 @@
                     android:layout_margin="8dp"
                     android:contentDescription="@string/app_name"
                     android:padding="8dp"
-                    android:src="@drawable/chat_icon" />
+                    android:tint="@color/accent"
+                    android:src="@drawable/ic_chat" />
 
                 <TextView
                     android:layout_width="match_parent"
