@@ -53,7 +53,7 @@
         android:id="@+id/iconEmail"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_email"
+        android:src="@drawable/ic_email2"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/iconUser"

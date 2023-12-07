@@ -31,7 +31,7 @@ public class CadastroDonatario extends AppCompatActivity {
     private EditText edit_nome, edit_email, edit_senha;
     private Button btCadastrarDonatario;
     String[] mensagens = {"Preencha todos os campos", "Cadastro realizado com sucesso"};
-    String usuarioID;
+    String donatarioID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +53,13 @@ public class CadastroDonatario extends AppCompatActivity {
                     snackbar.setTextColor(Color.RED);
                     snackbar.show();
                 } else{
-                    CadastrarUsuario(v);
+                    CadastrarDonatario(v);
                 }
             }
         });
     }
 
-    private void CadastrarUsuario(View v){
+    private void CadastrarDonatario(View v){
 
         String email = edit_email.getText().toString();
         String senha = edit_senha.getText().toString();
@@ -108,9 +108,9 @@ public class CadastroDonatario extends AppCompatActivity {
         Map<String,Object> usuarios = new HashMap<>();
         usuarios.put("nome",nome);
 
-        usuarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        donatarioID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        DocumentReference documentReference = db.collection("Usuarios").document(usuarioID);
+        DocumentReference documentReference = db.collection("Donatarios").document(donatarioID);
         documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

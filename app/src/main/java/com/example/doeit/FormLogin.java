@@ -67,13 +67,13 @@ public class FormLogin extends AppCompatActivity {
                     snackbar.setTextColor(Color.RED);
                     snackbar.show();
                 } else {
-                    AutenticarUsuario(v);
+                    AutenticarUsuario2(v);
                 }
             }
         });
     }
 
-    private void AutenticarUsuario(View view){
+    private void AutenticarUsuario1(View view){
 
         String email = edit_email.getText().toString();
         String senha = edit_senha.getText().toString();
@@ -88,7 +88,43 @@ public class FormLogin extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            TelaPrincipal();
+                            TelaPrincipal1();
+                        }
+                    }, 2000);
+                } else {
+                    String erro;
+
+                    try {
+                        throw task.getException();
+                    } catch (Exception e) {
+                        erro = "Erro ao logar usuário";
+                    }
+
+                    Snackbar snackbar = Snackbar.make(view, erro, Snackbar.LENGTH_SHORT);
+                    snackbar.setBackgroundTint(Color.WHITE);
+                    snackbar.setTextColor(Color.RED);
+                    snackbar.show();
+                }
+            }
+        });
+    }
+
+    private void AutenticarUsuario2(View view){
+
+        String email = edit_email.getText().toString();
+        String senha = edit_senha.getText().toString();
+
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+                    progressBar.setVisibility(View.VISIBLE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            TelaPrincipal2();
                         }
                     }, 2000);
                 } else {
@@ -116,12 +152,28 @@ public class FormLogin extends AppCompatActivity {
         FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
 
         if (usuarioAtual != null){
-            TelaPrincipal();
+            TelaPrincipal1();
         }
     }
 
-    private void TelaPrincipal(){
-        Intent intent = new Intent(FormLogin.this, DoadorActivity.class);
+    protected void onStart2() {
+        super.onStart();
+
+        FirebaseUser usuarioAtual = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (usuarioAtual != null){
+            TelaPrincipal2();
+        }
+    }
+
+    private void TelaPrincipal1(){
+        Intent intent = new Intent(FormLogin.this, PerfilUsuarioDoador.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void TelaPrincipal2(){
+        Intent intent = new Intent(FormLogin.this, Perfil_Donatario.class);
         startActivity(intent);
         finish();
     }

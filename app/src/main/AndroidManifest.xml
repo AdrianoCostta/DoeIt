@@ -13,13 +13,25 @@
         android:theme="@style/Theme.DoeIt"
         tools:targetApi="34">
         <activity
+            android:name=".HomeDonatario"
+            android:exported="false" />
+        <activity
             android:name=".PerfilUsuarioDoador"
             android:exported="false" />
         <activity
             android:name=".FormCadastroDoador"
             android:exported="false" />
         <activity
+            android:name=".DoadorActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroDonatario"
+            android:exported="false" />
+        <activity
+            android:name=".Perfil_Donatario"
             android:exported="false" />
         <activity
             android:name=".FormLogin"
