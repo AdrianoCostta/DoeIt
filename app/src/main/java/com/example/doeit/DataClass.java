@@ -4,7 +4,6 @@ public class DataClass {
 
     private String dataName;
     private String dataDesc;
-    private String dataStatus;
     private String dataImage;
 
     public String getDataName() {
@@ -15,18 +14,25 @@ public class DataClass {
         return dataDesc;
     }
 
-    public String getDataStatus() {
-        return dataStatus;
-    }
-
     public String getDataImage() {
         return dataImage;
     }
 
-    public DataClass(String dataName, String dataDesc, String dataStatus, String dataImage) {
+    public DataClass(String dataName, String dataDesc, String dataImage) {
         this.dataName = dataName;
         this.dataDesc = dataDesc;
-        this.dataStatus = dataStatus;
+        this.dataImage = dataImage;
+    }
+
+    public void setDataName(String dataName) {
+        this.dataName = dataName;
+    }
+
+    public void setDataDesc(String dataDesc) {
+        this.dataDesc = dataDesc;
+    }
+
+    public void setDataImage(String dataImage) {
         this.dataImage = dataImage;
     }
 
